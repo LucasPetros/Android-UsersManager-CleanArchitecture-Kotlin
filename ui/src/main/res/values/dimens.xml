@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Margin -->
+    <dimen name="spacing_huge">64dp</dimen>
+    <dimen name="spacing_large">32dp</dimen>
+    <dimen name="spacing_normal">16dp</dimen>
+    <dimen name="spacing_small">8dp</dimen>
+    <dimen name="spacing_tiny">4dp</dimen>
+
+    <!-- Padding -->
+    <dimen name="padding_large">16dp</dimen>
+    <dimen name="padding_small">8dp</dimen>
+
+    <!-- Icon -->
+    <dimen name="icon_size_small">24dp</dimen>
+    <dimen name="icon_size_medium">56dp</dimen>
+    <dimen name="icon_size_large">144dp</dimen>
+
+    <!-- Corner Radius -->
+    <dimen name="corner_radius_normal">4dp</dimen>
+
+    <!-- Text Sizes -->
+    <dimen name="txt_size_huge">38sp</dimen>
+    <dimen name="txt_size_large">22sp</dimen>
+    <dimen name="txt_size_medium">18sp</dimen>
+    <dimen name="txt_size_normal">16sp</dimen>
+    <dimen name="txt_size_small">12sp</dimen>
+</resources>

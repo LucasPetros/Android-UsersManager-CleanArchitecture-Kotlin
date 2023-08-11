@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">UsersManagerApp</string>
+    <string name="empty_list_users">User not found. Try again!</string>
+    <string name="user_management">User Management</string>
+    <string name="search_for_the_user_s_name">Search for the user\'s name</string>
+    <string name="users_found">Users found:</string>
+    <string name="item_list_loading_message">Loading Users\'s list…</string>
+
+    <string name="list_size" translatable="false">%d</string>
+
+    <!-- Error Container -->
+    <string name="ops">Ops… :(</string>
+    <string name="try_again">Try Again</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

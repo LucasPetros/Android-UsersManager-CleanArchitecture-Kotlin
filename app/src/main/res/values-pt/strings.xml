@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">UsersManagerApp</string>
+    <string name="empty_list_users">Não foi encontrado nenhum usuário !</string>
+    <string name="user_management">Gerenciamento de Usuários</string>
+    <string name="search_for_the_user_s_name">Buscar pelo nome do usuário</string>
+    <string name="users_found">Usuários encontrados:</string>
+    <string name="item_list_loading_message">Carregando Lista de Usuários…</string>
+
+    <!-- Error Container -->
+    <string name="ops">Ops… :(</string>
+    <string name="try_again">Tente Novamente</string>
+</resources>
