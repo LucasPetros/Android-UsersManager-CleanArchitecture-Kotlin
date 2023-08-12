@@ -1,7 +1,9 @@
 package com.lucas.petros.usersmanagerapp.users.presentation.item.list
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.lucas.petros.commons.base.BaseFragment
@@ -20,8 +22,9 @@ class UserListFragment : BaseFragment<FragmentUserListBinding>(R.layout.fragment
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        vm.getUserList()
         setupRecyclerView()
+        vm.searchValue.value = ""
+        vm.getUserList()
 
     }
 
@@ -35,11 +38,15 @@ class UserListFragment : BaseFragment<FragmentUserListBinding>(R.layout.fragment
 
     private fun setupRecyclerView() {
         binding.rvUsers.adapter = userListAdapter
+
     }
 
     private fun observeList() {
         vm.list.observe(viewLifecycleOwner) { list ->
             userListAdapter.submitList(list)
+            binding.rvUsers.postDelayed({
+                binding.rvUsers.scrollToPosition(0)
+            }, 200)
         }
     }
 }

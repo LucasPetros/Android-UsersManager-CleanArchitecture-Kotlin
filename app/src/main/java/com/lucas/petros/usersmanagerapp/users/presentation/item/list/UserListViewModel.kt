@@ -26,10 +26,10 @@ class UserListViewModel @Inject constructor(
     val showError = stateUserList.map { it.error.isNotBlank() }
 
     val searchValue = MutableLiveData<String>()
-    lateinit var completeList: List<User>
+    var completeList: List<User>? = null
     val list = MediatorLiveData<List<User>>().apply {
         addSource(searchValue) { searchValue ->
-            value = completeList.filter {
+            value = completeList?.filter {
                 it.firstName.lowercase().contains(searchValue.lowercase())
             }
         }
