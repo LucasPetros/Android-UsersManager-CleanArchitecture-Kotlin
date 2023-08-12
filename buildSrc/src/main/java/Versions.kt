@@ -26,8 +26,6 @@ object Versions {
     // Navigation
     const val navigation = "2.5.3"
 
-    //Room
-    const val roomVersion = "2.4.3"
 
     // UI
     const val constraintLayout = "2.1.4"
@@ -39,16 +37,8 @@ object Versions {
 
     // Unit test
     const val junit = "4.13.2"
-    const val koinTest = "3.2.0"
     const val mockk = "1.12.5"
     const val coreTesting = "2.1.0"
     const val coroutinesTesting = "1.6.2"
-    const val mockitoVersion = "4.8.0"
-
-    // Instrumented test
-    const val extJunit = "1.1.3"
-    const val espresso = "3.4.0"
-    const val runner = "1.4.0"
-    const val navigationTesting = "2.5.2"
-    const val fragmentTesting = "1.5.3"
+    const val turbineVersion = "0.12.3"
 }

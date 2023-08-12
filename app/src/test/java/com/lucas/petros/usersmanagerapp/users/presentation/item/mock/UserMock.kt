@@ -1,39 +1,40 @@
 package com.lucas.petros.usersmanagerapp.users.presentation.item.mock
 
-import com.lucas.petros.usersmanagerapp.users.domain.model.*
+import com.lucas.petros.usersmanagerapp.users.data.remote.dto.*
 
 object UserMock {
-    private val employment = Employment(
+    private val employment = EmploymentDto(
         title = "",
         keySkill = ""
     )
 
-    private val address = Address(
+    private val address = AddressDto(
         city = "",
         streetName = "",
         streetAddress = "",
         zipCode = "",
         state = "",
-        country = ""
+        country = "",
+        coordinates = null
     )
 
-    private val creditCard = CreditCard(
+    private val creditCard = CreditCardDto(
         ccNumber = ""
     )
 
-    private val subscription = Subscription(
+    private val subscription = SubscriptionDto(
         plan = "",
         status = "",
         paymentMethod = "",
         term = ""
     )
 
-    val user = User(
+    private val user = UserDto(
         id = 10,
         firstName = "Mockk",
         lastName = "Turbine",
         email = "mockk@mockk.com",
-        imageUrl = "",
+        avatar = "",
         gender = "Female",
         phoneNumber = "3244-1900",
         socialInsuranceNumber = "",
@@ -41,8 +42,30 @@ object UserMock {
         employment = employment,
         address = address,
         creditCard = creditCard,
-        subscription = subscription
+        subscription = subscription,
+        uid = null,
+        username = null,
+        password = null
     )
 
-    val listUser = listOf(user, user, user)
+    private val userNew = UserDto(
+        id = 10,
+        firstName = "lock",
+        lastName = "Turbine",
+        email = "mockk@mockk.com",
+        avatar = "",
+        gender = "Female",
+        phoneNumber = "3244-1900",
+        socialInsuranceNumber = "",
+        dateOfBirth = "",
+        employment = employment,
+        address = address,
+        creditCard = creditCard,
+        subscription = subscription,
+        uid = null,
+        username = null,
+        password = null
+    )
+
+    val listUser = listOf(userNew, user, user)
 }

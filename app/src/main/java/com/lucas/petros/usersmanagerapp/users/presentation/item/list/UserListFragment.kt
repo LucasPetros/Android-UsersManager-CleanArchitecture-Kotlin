@@ -3,6 +3,7 @@ package com.lucas.petros.usersmanagerapp.users.presentation.item.list
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.lucas.petros.commons.base.BaseFragment
 import com.lucas.petros.usersmanagerapp.R
 import com.lucas.petros.usersmanagerapp.databinding.FragmentUserListBinding
@@ -12,14 +13,14 @@ import dagger.hilt.android.AndroidEntryPoint
 class UserListFragment : BaseFragment<FragmentUserListBinding>(R.layout.fragment_user_list) {
     private val vm: UserListViewModel by viewModels()
 
-    private val userListAdapter = UserListAdapter() { user ->
-        /*val direction = UserListFragmentDirections.NavigateToDetailsUser()
-        direction.user = user
-        findNavController().navigate(direction)*/
+    private val userListAdapter = UserListAdapter { user ->
+        val direction = UserListFragmentDirections.toUserDetailsFragment(user)
+        findNavController().navigate(direction)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        vm.getUserList()
         setupRecyclerView()
 
     }

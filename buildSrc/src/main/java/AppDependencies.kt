@@ -65,6 +65,7 @@ object AppDependencies {
     private const val coreTesting = "androidx.arch.core:core-testing:${Versions.coreTesting}"
     private const val coroutinesTesting =
         "org.jetbrains.kotlinx:kotlinx-coroutines-test:${Versions.coroutinesTesting}"
+    private const val turbine = "app.cash.turbine:turbine:${Versions.turbineVersion}"
 
     val buildClassPath = arrayListOf<String>().apply {
         add(buildToolsClassPath)
@@ -116,6 +117,7 @@ object AppDependencies {
         add(mockk)
         add(coreTesting)
         add(coroutinesTesting)
+        add(turbine)
     }
 }
 

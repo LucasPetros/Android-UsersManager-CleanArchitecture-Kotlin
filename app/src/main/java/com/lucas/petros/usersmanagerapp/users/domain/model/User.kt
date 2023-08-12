@@ -14,4 +14,4 @@ data class User(
     val address: Address,
     val creditCard: CreditCard,
     val subscription: Subscription
-)
+) : java.io.Serializable

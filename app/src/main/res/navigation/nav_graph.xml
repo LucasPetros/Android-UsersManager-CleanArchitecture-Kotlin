@@ -8,5 +8,17 @@
     <fragment
         android:id="@+id/userListFragment"
         android:name="com.lucas.petros.usersmanagerapp.users.presentation.item.list.UserListFragment"
-        android:label="UserListFragment" />
+        android:label="UserListFragment" >
+        <action
+            android:id="@+id/to_userDetailsFragment"
+            app:destination="@id/userDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/userDetailsFragment"
+        android:name="com.lucas.petros.usersmanagerapp.users.presentation.item.detail.UserDetailsFragment"
+        android:label="UserDetailsFragment" >
+        <argument
+            android:name="user"
+            app:argType="com.lucas.petros.usersmanagerapp.users.domain.model.User" />
+    </fragment>
 </navigation>

@@ -19,8 +19,8 @@ class UserListViewModel @Inject constructor(
     private val useCase: GetListUser
 ) : BaseViewModel() {
 
-    private val stateUserList = MutableLiveData<BaseState<List<User>>>()
-    private val userList =  stateUserList.map { it.data }
+    val stateUserList = MutableLiveData<BaseState<List<User>>>()
+    val userList = stateUserList.map { it.data }
     val showLoading = stateUserList.map { it.isLoading }
     val messageError = stateUserList.map { it.error }
     val showError = stateUserList.map { it.error.isNotBlank() }
@@ -36,23 +36,19 @@ class UserListViewModel @Inject constructor(
 
         addSource(userList) { list ->
             list?.let {
-                value = list
                 completeList = list
+                value = list
             }
         }
-    }
-
-    init {
-        getUserList()
     }
 
     fun tryAgain() {
         getUserList()
     }
 
-    private fun getUserList(){
+    fun getUserList() {
         useCase.invoke().onEach { result ->
-            ResourceUtil.mapResultToState(result,stateUserList)
+            ResourceUtil.mapResultToState(result, stateUserList)
         }.launchIn(viewModelScope)
     }
 }
