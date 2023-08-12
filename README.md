@@ -21,7 +21,8 @@ O projeto usa o padrão de arquitetura MVVM com Clean Architecture
 • Modularization
 • Clean architecture
 • Data Binding
-• Unit tests (JUnit - MockK, Mockito e Turbine)
+• Unit tests (JUnit - MockK e Turbine)
+Dentre outros..
 
 ## Screenshots
 
