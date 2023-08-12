@@ -12,12 +12,7 @@ fun UserDto.toUser() = User(
     imageUrl = avatar.handleOpt(),
     gender = gender.handleOpt(),
     phoneNumber = phoneNumber.handleOpt(),
-    socialInsuranceNumber = socialInsuranceNumber.handleOpt(),
     dateOfBirth = dateOfBirth.handleOpt(),
-    employment = employment.toEmployment(),
-    address = address.toAddress(),
-    creditCard = creditCard.toCreditCard(),
-    subscription = subscription.toSubscription()
 )
 
 fun List<UserDto>.toListUser() = map { userDto ->

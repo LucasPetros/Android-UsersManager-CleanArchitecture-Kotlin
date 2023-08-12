@@ -29,7 +29,7 @@ object UserMock {
         term = ""
     )
 
-    private val user = UserDto(
+    val user = UserDto(
         id = 10,
         firstName = "Mockk",
         lastName = "Turbine",

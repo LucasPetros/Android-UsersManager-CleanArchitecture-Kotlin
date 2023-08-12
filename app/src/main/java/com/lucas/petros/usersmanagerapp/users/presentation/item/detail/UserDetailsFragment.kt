@@ -2,6 +2,7 @@ package com.lucas.petros.usersmanagerapp.users.presentation.item.detail
 
 import androidx.fragment.app.viewModels
 import com.lucas.petros.commons.base.BaseFragment
+import com.lucas.petros.commons.extension.observeAndNavigateBack
 import com.lucas.petros.usersmanagerapp.R
 import com.lucas.petros.usersmanagerapp.databinding.FragmentUserDetailsBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -16,5 +17,6 @@ class UserDetailsFragment :
     }
 
     override fun setupObservers() {
+        observeAndNavigateBack(viewModel.navigateBack)
     }
 }

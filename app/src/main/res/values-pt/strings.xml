@@ -9,4 +9,12 @@
     <!-- Error Container -->
     <string name="ops">Ops… :(</string>
     <string name="try_again">Tente Novamente</string>
+
+    <!-- User Details -->
+    <string name="name">Nome: %s %s</string>
+    <string name="email">Email: %s</string>
+    <string name="gender">Sexo: %s</string>
+    <string name="phone_number">Telefone: %s</string>
+    <string name="date_birth">Data de Nascimento: %s</string>
+    <string name="user_details">Detalhes do Usuário</string>
 </resources>

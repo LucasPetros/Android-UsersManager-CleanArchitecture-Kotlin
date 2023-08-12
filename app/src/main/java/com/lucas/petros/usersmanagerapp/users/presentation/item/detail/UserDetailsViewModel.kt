@@ -11,6 +11,6 @@ class UserDetailsViewModel @Inject constructor(
     state: SavedStateHandle
 ) : BaseViewModel() {
 
-    private val args = UserDetailsFragmentArgs.fromSavedStateHandle(state)
+    val args = UserDetailsFragmentArgs.fromSavedStateHandle(state)
     var user: User? = args.user
 }
