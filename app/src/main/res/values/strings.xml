@@ -13,7 +13,7 @@
     <string name="try_again">Try Again</string>
 
     <!-- User Details -->
-    <string name="name">Name: %s %s</string>
+    <string name="name">%s %s</string>
     <string name="email">Email: %s</string>
     <string name="gender">Gender: %s</string>
     <string name="phone_number">Phone: %s</string>

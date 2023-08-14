@@ -7,7 +7,7 @@
 
         <variable
             name="item"
-            type="com.lucas.petros.usersmanagerapp.users.domain.model.User" />
+            type="com.lucas.petros.usersmanagerapp.users.presentation.item.list.ItemUser" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -55,7 +55,7 @@
                     app:layout_constraintStart_toEndOf="@+id/ivAvatar"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintVertical_chainStyle="packed"
-                    tools:text="@{item.firstName}" />
+                    tools:text="@{item.name}" />
 
                 <TextView
                     android:id="@+id/tvEmailUser"

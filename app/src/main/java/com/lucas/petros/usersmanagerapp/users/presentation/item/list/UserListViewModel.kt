@@ -30,7 +30,7 @@ class UserListViewModel @Inject constructor(
     val list = MediatorLiveData<List<User>>().apply {
         addSource(searchValue) { searchValue ->
             value = completeList?.filter {
-                it.firstName.lowercase().contains(searchValue.lowercase())
+                it.firstName.contains(searchValue,ignoreCase = true)
             }
         }
 

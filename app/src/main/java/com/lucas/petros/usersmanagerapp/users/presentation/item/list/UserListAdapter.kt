@@ -10,6 +10,12 @@ import com.lucas.petros.usersmanagerapp.R
 import com.lucas.petros.usersmanagerapp.databinding.UserItemBinding
 import com.lucas.petros.usersmanagerapp.users.domain.model.User
 
+data class ItemUser(
+    val name: String,
+    val imageUrl: String,
+    val email: String,
+)
+
 internal class UserListAdapter(
     private val onItemClick: (User) -> Unit,
 ) : ListAdapter<User, UserListAdapter.DataHolder>(DiffCallback) {
@@ -28,7 +34,11 @@ internal class UserListAdapter(
     override fun onBindViewHolder(holder: DataHolder, position: Int) {
         holder.binding.run {
             val userItem = getItem(position)
-            item = userItem
+            item = ItemUser(
+                name = userItem.firstName + " " + userItem.lastName,
+                imageUrl = userItem.imageUrl,
+                email = userItem.email
+            )
             root.setOnClickListener { onItemClick(userItem) }
         }
     }
