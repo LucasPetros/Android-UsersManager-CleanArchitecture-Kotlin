@@ -1,9 +1,7 @@
 package com.lucas.petros.usersmanagerapp.users.presentation.item.list
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.lucas.petros.commons.base.BaseFragment
@@ -20,12 +18,11 @@ class UserListFragment : BaseFragment<FragmentUserListBinding>(R.layout.fragment
         findNavController().navigate(direction)
     }
 
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupRecyclerView()
         vm.searchValue.value = ""
-        vm.getUserList()
-
     }
 
     override fun setupViewModel() {
@@ -48,5 +45,10 @@ class UserListFragment : BaseFragment<FragmentUserListBinding>(R.layout.fragment
                 binding.rvUsers.scrollToPosition(0)
             }, 200)
         }
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        vm.getUserList()
     }
 }
