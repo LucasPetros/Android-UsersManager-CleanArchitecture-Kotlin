@@ -5,6 +5,7 @@ import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
+import com.lucas.petros.commons.R
 
 /**
  * Download the image into the ImageView
@@ -18,5 +19,6 @@ fun ImageView.loadUrlImage(url: String?) {
         .load(url)
         .transition(DrawableTransitionOptions.withCrossFade())
         .diskCacheStrategy(DiskCacheStrategy.ALL)
+        .placeholder(R.drawable.place_holder)
         .into(this)
 }
