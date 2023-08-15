@@ -136,7 +136,7 @@
 
             <com.lucas.petros.ui.UILoading
                 android:id="@+id/uil_category_item"
-                isVisible="@{vm.showLoading}"
+                isVisible="@{vm.resourceList.showLoader}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/spacing_huge"
@@ -148,7 +148,7 @@
 
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:id="@+id/ll_error_container"
-                isVisible="@{vm.showError}"
+                isVisible="@{vm.resourceList.showError}"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:gravity="center"
@@ -171,7 +171,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/spacing_normal"
-                    android:text="@{vm.messageError}"
+                    android:text="@{vm.resourceList.error.message}"
                     android:textColor="@color/dark_gray"
                     android:textSize="14sp"
                     tools:text="Error message from resource here..." />

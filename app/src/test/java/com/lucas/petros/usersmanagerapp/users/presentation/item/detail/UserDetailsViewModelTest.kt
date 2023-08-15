@@ -4,10 +4,9 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.SavedStateHandle
 import com.lucas.petros.usersmanagerapp.CoroutinesMainTestRule
 import com.lucas.petros.usersmanagerapp.users.domain.mapper.toUser
-import com.lucas.petros.usersmanagerapp.users.presentation.item.mock.UserMock.user
+import com.lucas.petros.usersmanagerapp.users.presentation.item.mock.UserMock.userMock
 import junit.framework.TestCase.assertEquals
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.test.runTest
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -29,16 +28,15 @@ class UserDetailsViewModelTest {
         vm = UserDetailsViewModel(savedStateHandle)
     }
 
-    fun initSavedStateHandle() {
+    private fun initSavedStateHandle() {
         savedStateHandle = SavedStateHandle()
-        val user = user.toUser()
+        val user = userMock.toUser()
         savedStateHandle["user"] = user
     }
 
     @Test
     fun `when ViewModel is initialized with a selected user, then retrieving user from savedStateHandle should return the selected user`() =
-        runTest {
-            val result = vm.args.user
-            assertEquals(user.toUser(), result)
+        vm.run {
+            assertEquals(userMock.toUser(), args.user)
         }
 }

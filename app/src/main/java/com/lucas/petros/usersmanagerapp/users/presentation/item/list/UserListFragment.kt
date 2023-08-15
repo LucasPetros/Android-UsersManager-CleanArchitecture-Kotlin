@@ -11,6 +11,7 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class UserListFragment : BaseFragment<FragmentUserListBinding>(R.layout.fragment_user_list) {
+
     private val vm: UserListViewModel by viewModels()
 
     private val userListAdapter = UserListAdapter { user ->
@@ -18,15 +19,14 @@ class UserListFragment : BaseFragment<FragmentUserListBinding>(R.layout.fragment
         findNavController().navigate(direction)
     }
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupRecyclerView()
-        vm.searchValue.value = ""
     }
 
     override fun setupViewModel() {
         binding.vm = vm
+        lifecycle.addObserver(vm)
     }
 
     override fun setupObservers() {
@@ -35,7 +35,6 @@ class UserListFragment : BaseFragment<FragmentUserListBinding>(R.layout.fragment
 
     private fun setupRecyclerView() {
         binding.rvUsers.adapter = userListAdapter
-
     }
 
     private fun observeList() {
@@ -45,10 +44,5 @@ class UserListFragment : BaseFragment<FragmentUserListBinding>(R.layout.fragment
                 binding.rvUsers.scrollToPosition(0)
             }, 200)
         }
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        vm.getUserList()
     }
 }

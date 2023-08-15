@@ -1,6 +1,10 @@
 package com.lucas.petros.usersmanagerapp.users.presentation.item.mock
 
-import com.lucas.petros.usersmanagerapp.users.data.remote.dto.*
+import com.lucas.petros.usersmanagerapp.users.data.remote.dto.AddressDto
+import com.lucas.petros.usersmanagerapp.users.data.remote.dto.CreditCardDto
+import com.lucas.petros.usersmanagerapp.users.data.remote.dto.EmploymentDto
+import com.lucas.petros.usersmanagerapp.users.data.remote.dto.SubscriptionDto
+import com.lucas.petros.usersmanagerapp.users.data.remote.dto.UserDto
 
 object UserMock {
     private val employment = EmploymentDto(
@@ -29,7 +33,7 @@ object UserMock {
         term = ""
     )
 
-    val user = UserDto(
+    val userMock = UserDto(
         id = 10,
         firstName = "Mockk",
         lastName = "Turbine",
@@ -67,5 +71,5 @@ object UserMock {
         password = null
     )
 
-    val listUser = listOf(userNew, user, user)
+    val listUser = listOf(userNew, userMock, userMock)
 }

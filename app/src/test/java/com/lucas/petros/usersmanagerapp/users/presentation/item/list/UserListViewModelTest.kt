@@ -1,24 +1,22 @@
 package com.lucas.petros.usersmanagerapp.users.presentation.item.list
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import com.lucas.petros.commons.base.BaseState
-import com.lucas.petros.commons.data.DataResource
-import com.lucas.petros.commons.extension.handleOpt
-import com.lucas.petros.commons.utils.Constants
-import com.lucas.petros.commons.utils.Constants.ERROR_NETWORK
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.LifecycleRegistry
+import androidx.lifecycle.Observer
 import com.lucas.petros.usersmanagerapp.CoroutinesMainTestRule
-import com.lucas.petros.usersmanagerapp.getOrAwaitValue
 import com.lucas.petros.usersmanagerapp.users.domain.mapper.toListUser
 import com.lucas.petros.usersmanagerapp.users.domain.model.User
 import com.lucas.petros.usersmanagerapp.users.domain.usecase.GetListUser
 import com.lucas.petros.usersmanagerapp.users.presentation.item.mock.UserMock.listUser
 import io.mockk.coEvery
+import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify
-import junit.framework.TestCase
+import junit.framework.TestCase.assertEquals
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.test.runTest
+import org.junit.After
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Rule
@@ -35,10 +33,14 @@ class UserListViewModelTest {
 
     private var useCase = mockk<GetListUser>(relaxed = true)
     private lateinit var vm: UserListViewModel
+    private val searchValueObserver = Observer<String> {}
+    private val resourceList = Observer<List<User>?> {}
+    private val listObserver = Observer<List<User>> {}
 
     @Before
     fun prepare() {
         setupViewModel()
+        prepareObservers()
     }
 
     private fun setupViewModel() {
@@ -47,205 +49,86 @@ class UserListViewModelTest {
         )
     }
 
-    // Show Loading - Section
+    private fun prepareObservers() {
+        vm.searchValue.observeForever(searchValueObserver)
+        vm.resourceList.data.observeForever(resourceList)
+        vm.list.observeForever(listObserver)
+
+    }
+
+    @After
+    fun cleanUp() {
+        cleanUpObservers()
+    }
+
+    private fun cleanUpObservers() {
+        vm.searchValue.removeObserver(searchValueObserver)
+        vm.resourceList.data.removeObserver(resourceList)
+        vm.list.removeObserver(listObserver)
+    }
+
+    // Resource - Section
     @Test
-    fun `GIVEN the initial state of ViewModel THEN showLoading is false`() {
-        TestCase.assertFalse(vm.showLoading.value.handleOpt())
+    fun `GIVEN the initial state of UserListViewModel THEN resourceList_value is null`() {
+        Assert.assertNull(vm.resourceList.data.value)
     }
 
     @Test
-    fun `WHEN getUserList is called and Resource Loading is issued THEN showLoading is true`() =
-        runTest {
-
-            coEvery { useCase() } returns flow {
-                emit(DataResource.Loading())
-            }
-
-            vm.getUserList()
-
-            val value = vm.showLoading.getOrAwaitValue()
-            Assert.assertEquals(true, value)
-        }
-
-    @Test
-    fun `WHEN getUserList is called and Resource Success is issued THEN showLoading is false`() =
-        runTest {
-
-            coEvery { useCase() } returns flow {
-                emit(DataResource.Success(listOf()))
-            }
-
-            vm.getUserList()
-
-            val value = vm.showLoading.getOrAwaitValue()
-
-            Assert.assertEquals(false, value)
-        }
-
-    @Test
-    fun `WHEN getUserList is called and Resource Error is issued THEN showLoading is false`() =
-        runTest {
-            coEvery { useCase() } returns flow {
-                emit(DataResource.Error("test error"))
-            }
-
-            vm.getUserList()
-
-            val value = vm.showLoading.getOrAwaitValue()
-
-            Assert.assertEquals(false, value)
-        }
-
-    // Show Error - Section
-    @Test
-    fun `GIVEN the initial state of ViewModel THEN showError is false`() {
-        TestCase.assertFalse(vm.showError.value.handleOpt())
+    fun `WHEN resourceList_value is null THEN list_value is null`() {
+        vm.run { Assert.assertNull(list.value) }
     }
 
     @Test
-    fun `WHEN getUserList returns error THEN showError is true`() =
-        runTest {
-            coEvery { useCase() } returns flow {
-                emit(DataResource.Error(ERROR_NETWORK))
-            }
-
-            vm.getUserList()
-
-            val value = vm.showError.getOrAwaitValue()
-
-            Assert.assertEquals(true, value)
+    fun `WHEN calling onCreate() THEN the GetListUsersUseCase is called by the resourceList`() {
+        vm.run {
+            val lifecycleOwner = mockk<LifecycleOwner>()
+            onCreate(lifecycleOwner)
+            verify { vm.resourceList.loadData() }
         }
-
-    // message Error - Section
-    @Test
-    fun `GIVEN the initial state of ViewModel THEN messageError is blank`() {
-        TestCase.assertEquals(null, vm.messageError.value)
     }
 
     @Test
-    fun `WHEN getUserList returns error THEN messageError is equals error`() =
-        runTest {
-            coEvery { useCase() } returns flow {
-                emit(DataResource.Error(ERROR_NETWORK))
-            }
-
-            vm.getUserList()
-
-            val value = vm.messageError.getOrAwaitValue()
-
-            Assert.assertEquals(ERROR_NETWORK, value)
+    fun `WHEN calling onCreate() THEN the list_value and completedList are equal to the resource_list_data`() {
+        vm.run {
+            coEvery { useCase() } returns listUser.toListUser()
+            val lifecycleOwner = mockk<LifecycleOwner>()
+            onCreate(lifecycleOwner)
+            assertEquals(listUser.toListUser(), list.value)
+            assertEquals(listUser.toListUser(), completeList)
         }
-
-    // State stateUserList - Section
-    @Test
-    fun `GIVEN the initial state of ViewModel THEN stateUserList is null`() {
-        TestCase.assertNull(vm.stateUserList.value)
-    }
-
-    @Test
-    fun `WHEN getUserList returns users THEN stateUserList_data returns users`() =
-        runTest {
-            val correctState = BaseState(
-                isLoading = false,
-                data = listUser.toListUser(),
-                error = ""
-            )
-
-            coEvery { useCase() } returns flow {
-                emit(DataResource.Success(listUser.toListUser()))
-            }
-
-            vm.getUserList()
-
-            val value = vm.stateUserList.getOrAwaitValue()
-            Assert.assertEquals(correctState, value)
-        }
-
-    @Test
-    fun `WHEN getUserList returns IOException error THEN stateUserList_error returns network error `() =
-        runTest {
-            val correctState = BaseState(
-                isLoading = false,
-                data = null,
-                error = ERROR_NETWORK
-            )
-
-            coEvery { useCase() } returns flow {
-                emit(DataResource.Error(ERROR_NETWORK))
-            }
-
-            vm.getUserList()
-
-            val value = vm.stateUserList.getOrAwaitValue()
-            Assert.assertEquals(correctState, value)
-        }
-
-    @Test
-    fun `WHEN getUserList returns HttpException error THEN stateUserList_error returns unexpected error `() =
-        runTest {
-            val correctState = BaseState(
-                isLoading = false,
-                data = null,
-                error = Constants.UNEXPECTED_ERROR
-            )
-
-            coEvery { useCase() } returns flow {
-                emit(DataResource.Error(Constants.UNEXPECTED_ERROR))
-            }
-
-            vm.getUserList()
-
-            val value = vm.stateUserList.getOrAwaitValue()
-            Assert.assertEquals(correctState, value)
-        }
-
-    @Test
-    fun `WHEN getUserList returns empty list THEN stateUserList_data returns listOf`() =
-        runTest {
-            val correctState = BaseState(
-                isLoading = false,
-                data = listOf<User>(),
-                error = ""
-            )
-
-            coEvery { useCase() } returns flow {
-                emit(DataResource.Success(listOf()))
-            }
-
-            vm.getUserList()
-
-            val value = vm.stateUserList.getOrAwaitValue()
-            Assert.assertEquals(correctState, value)
-        }
-
-    // Search - Section
-    @Test
-    fun `GIVEN the initial state of UserListViewModel THEN searchValue_value is null`() {
-        Assert.assertNull(vm.searchValue.value)
     }
 
     @Test
     fun `GIVEN the list_value has three items WHEN search_value receives a value that match just the first item THEN the list_value will have just one item`() {
-        runTest {
-            coEvery { useCase() } returns flow {
-                emit(DataResource.Success(listUser.toListUser()))
-            }
-
-            vm.getUserList()
-            val completeList = vm.userList.getOrAwaitValue()
-            vm.completeList = completeList.handleOpt()
-            vm.searchValue.value = "lock"
-            val value = vm.list.getOrAwaitValue()
-            Assert.assertEquals(1, value.size)
+        vm.run {
+            coEvery { useCase() } returns listUser.toListUser()
+            val lifecycleOwner = mockk<LifecycleOwner>()
+            onCreate(lifecycleOwner)
+            searchValue.value = "lock"
+            Assert.assertEquals(1, list.value?.size)
         }
     }
 
-    //section
     @Test
-    fun `WHEN tryAgain is instantiated THEN the GetUserListUseCase is called by the getUserList`() {
-        runTest {
-            vm.tryAgain()
-            verify { useCase.invoke() }
+    fun `WHEN calling tryAgain() THEN the GetUserListUseCase is called by the resourceList`() {
+        vm.run {
+            tryAgain()
+            verify { resourceList.loadData() }
         }
+    }
+
+    @Test
+    fun `Verify if UserListViewModel extends DefaultLifeCycleObserver`() {
+        val mockedVm = mockk<UserListViewModel>(relaxUnitFun = true)
+
+        val lifecycleOwner = mockk<LifecycleOwner>()
+        val lifecycle = LifecycleRegistry(mockk())
+        every { lifecycleOwner.lifecycle } returns lifecycle
+
+        lifecycle.addObserver(mockedVm)
+        verify(exactly = 0) { mockedVm.onCreate(any()) }
+
+        lifecycle.currentState = Lifecycle.State.CREATED
+        verify { mockedVm.onCreate(any()) }
     }
 }

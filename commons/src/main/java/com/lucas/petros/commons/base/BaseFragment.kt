@@ -13,7 +13,7 @@ abstract class BaseFragment<VDB : ViewDataBinding>(
     @LayoutRes private val layoutId: Int
 ) : Fragment() {
 
-     lateinit var binding: VDB
+    protected lateinit var binding: VDB
 
     override fun onCreateView(
         inflater: LayoutInflater,
