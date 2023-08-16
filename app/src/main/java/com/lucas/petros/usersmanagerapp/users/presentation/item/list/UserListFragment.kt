@@ -42,7 +42,7 @@ class UserListFragment : BaseFragment<FragmentUserListBinding>(R.layout.fragment
             userListAdapter.submitList(list)
             binding.rvUsers.postDelayed({
                 binding.rvUsers.scrollToPosition(0)
-            }, 200)
+            }, 100)
         }
     }
 }
