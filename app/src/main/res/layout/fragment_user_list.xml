@@ -35,7 +35,7 @@
                         android:id="@+id/background"
                         android:layout_width="0dp"
                         android:layout_height="@dimen/spacing_huge"
-                        android:background="@color/blue"
+                        android:background="?attr/colorPrimaryVariant"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -67,26 +67,34 @@
                 android:id="@+id/view"
                 android:layout_width="match_parent"
                 android:layout_height="80dp"
-                android:background="@color/blue"
+                android:background="?attr/colorPrimaryVariant"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <EditText
-                android:id="@+id/edtSearch"
-                style="@style/edtTextCustom"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/layoutSearch"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
                 android:layout_marginHorizontal="@dimen/spacing_normal"
-                android:autofillHints=""
-                android:drawableEnd="@drawable/ic_asset_search"
-                android:hint="@string/search_for_the_user_s_name"
-                android:labelFor="@id/edtSearch"
-                android:text="@={vm.searchValue}"
                 app:layout_constraintBottom_toBottomOf="@+id/view"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:hintEnabled="false"
+                app:hintAnimationEnabled="false"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edtSearch"
+                    style="@style/edtTextCustom"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:padding="@dimen/padding_small"
+                    android:drawableEnd="@drawable/ic_asset_search"
+                    android:hint="@string/search_for_the_user_s_name"
+                    android:text="@={vm.searchValue}" />
+
+            </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
                 android:id="@+id/txtUserNotFound"
@@ -170,10 +178,10 @@
                 <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textAlignment="center"
-                    android:layout_marginTop="@dimen/spacing_normal"
                     android:layout_marginHorizontal="@dimen/spacing_normal"
+                    android:layout_marginTop="@dimen/spacing_normal"
                     android:text="@{vm.resourceList.error.message}"
+                    android:textAlignment="center"
                     android:textColor="@color/dark_gray"
                     android:textSize="14sp"
                     tools:text="Error message from resource here..." />

@@ -6,7 +6,7 @@
         <item name="drawerLayoutCornerSize">10dp</item>
     </style>
 
-    <style name="edtTextCustom">
+    <style name="edtTextCustom" parent="Widget.MaterialComponents.TextView">
         <item name="android:background">@drawable/edt_custom</item>
         <item name="android:textColor">@color/black</item>
         <item name="android:textColorHint">@color/dark_gray</item>
