@@ -1,5 +1,8 @@
 # UsersManager - Clean Architecture
 
+An illustrative Android application that demonstrates the utilization of ViewModels and dataBinding, facilitating direct data transmission to the UI, while employing Hilt for dependency injection, implemented in Kotlin by Clean Architecture.
+
+
 ### Pré-requisitos
 
 The project has all the necessary dependencies in the Gradle files. Add the project to Android Studio or IntelliJ and synchronize. All the dependencies will be downloaded and installed
