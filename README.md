@@ -1,28 +1,31 @@
-# UsersManager
+# UsersManager - Clean Architecture
+
+An illustrative Android application that demonstrates the utilization of ViewModels and dataBinding, facilitating direct data transmission to the UI, while employing Hilt for dependency injection, implemented in Kotlin by Clean Architecture.
+
 
 ### Pré-requisitos
 
-O projeto tem todas as dependências necessárias nos arquivos gradle. Adicione o projeto ao Android Studio ou Intelij e sincronize. 
-Todas as dependências serão baixadas e instaladas.
+The project has all the necessary dependencies in the Gradle files. Add the project to Android Studio or IntelliJ and synchronize. All the dependencies will be downloaded and installed
 
+## Clean Architecture
+![https://fernandocejas.com/2018/05/07/architecting-android-reloaded/](https://github.com/android10/Sample-Data/blob/master/Android-CleanArchitecture-Kotlin/architecture/clean_architecture_reloaded_main.png)
 
-## Arquitetura
+### ----------------------------------------------------------------------------------------------
 
-O projeto usa o padrão de arquitetura MVVM com Clean Architecture
+## Android 3 Layers Architecture
+![https://fernandocejas.com/2018/05/07/architecting-android-reloaded/](https://github.com/android10/Sample-Data/blob/master/Android-CleanArchitecture-Kotlin/architecture/clean_architecture_reloaded_layers.png)
 
-## Neste projeto foi utilizado
+### ----------------------------------------------------------------------------------------------
 
-• Navigation(NavHost)
-• Life cycle Activity
-• Reactive Programming (States)
-• Dependency injection (Hilt/Dagger)
-• API REST / RESTful
-• Ui Components
-• Modularization
-• Clean architecture
-• Data Binding
-• Unit tests (JUnit - MockK e Turbine)
-Dentre outros..
+## UI Layer: MVVM 
+![https://fernandocejas.com/2018/05/07/architecting-android-reloaded/](https://github.com/android10/Sample-Data/blob/master/Android-CleanArchitecture-Kotlin/architecture/clean_architecture_reloaded_mvvm_app.png)
+
+### ----------------------------------------------------------------------------------------------
+
+## Data Layer: Repository 
+![https://fernandocejas.com/2018/05/07/architecting-android-reloaded/](https://github.com/android10/Sample-Data/blob/master/Android-CleanArchitecture-Kotlin/architecture/clean_archictecture_reloaded_repository.png)
+
+### ----------------------------------------------------------------------------------------------
 
 ## Screenshots
 
@@ -34,11 +37,10 @@ Dentre outros..
 
 https://github.com/LucasPetros/UsersManager/assets/82883174/2c5e6335-62b5-4101-8b76-0e65c14d7e71
 
-
 ## Autor
 
 ### Lucas Petros Borges da Silva
 * Repositório: https://github.com/LucasPetros
 * Linkedin: https://www.linkedin.com/in/Lucas-Petros/
 
-Obridado pela visita 🤩
+Thank you for showing interest in my project. Your engagement means a lot! 🤩
