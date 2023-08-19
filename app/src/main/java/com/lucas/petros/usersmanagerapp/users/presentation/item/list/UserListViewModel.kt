@@ -26,7 +26,7 @@ class UserListViewModel @Inject constructor(
     }
 
     @VisibleForTesting
-    lateinit var completeList: List<User>
+    var completeList: List<User> = listOf()
     val list = MediatorLiveData<List<User>>().apply {
         addSource(searchValue) { searchValue ->
             value = completeList.filter {
