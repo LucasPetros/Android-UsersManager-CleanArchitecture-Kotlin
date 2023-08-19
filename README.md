@@ -33,10 +33,6 @@ The project has all the necessary dependencies in the Gradle files. Add the proj
 
 ![dark](https://github.com/LucasPetros/UsersManager/assets/82883174/4a8d5d65-75a5-4fe3-b489-b0f2978d5953)
 
-## Movie
-
-https://github.com/LucasPetros/UsersManager/assets/82883174/2c5e6335-62b5-4101-8b76-0e65c14d7e71
-
 ## Autor
 
 ### Lucas Petros Borges da Silva
